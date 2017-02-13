@@ -1,0 +1,56 @@
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+        xmlns="http://www.springframework.org/schema/security"
+        xmlns:beans="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-4.1.xsd"
+>
+    <!--主要防止springsecurity拦截路径，不会影响其他拦截路径，默认是不拦截-->
+    <http pattern="/toLogin" security="none"/>
+    <http pattern="/static/**" security="none"/>
+    <http pattern="/otherLogin" security="none"/>
+    <!--
+        配置Springserurity一般需要
+        a. <http>注册过滤器链,配置表单登陆,注销等
+        b. 注册自定义的安全认证管理器
+        c. 注册自定义的授权过滤器
+    -->
+    <http use-expressions="true" entry-point-ref="loginUrlAuthenticationEntryPointEntryPoint">
+        <intercept-url pattern="/**" access="hasRole('ROLE_LOGIN')"/>
+        <intercept-url pattern="/deploy/**" access="hasRole('ROLE_DEPLOY')"/>
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <!--登出成功后url-->
+        <logout logout-success-url="/toLogin"/>
+        <!--拦截该路径的所需的过滤器-->
+        <custom-filter ref="loginAuthenticationFilter" position="FORM_LOGIN_FILTER"/>
+        <csrf disabled="true"/>
+    </http>
+
+    <beans:bean id="loginAuthenticationFilter" class="com.coffeehouse.common.security.LoginAuthenticationFilter">
+        <beans:property name="filterProcessesUrl" value="/securityLogin"/>
+        <beans:property name="authenticationSuccessHandler">
+            <beans:bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
+                <beans:property name="defaultTargetUrl" value="/login/init"/>
+            </beans:bean>
+        </beans:property>
+        <beans:property name="authenticationManager" ref="authenticationManager"/>
+    </beans:bean>
+
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="roleSecurityService"/>
+    </authentication-manager>
+
+    <beans:bean id="roleSecurityService" class="com.coffeehouse.common.security.RoleSecurityService"/>
+
+    <!--未登录切入点-->
+    <beans:bean id="loginUrlAuthenticationEntryPointEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <beans:constructor-arg name="loginFormUrl" value="/toLogin"/>
+    </beans:bean>
+
+</beans:beans>

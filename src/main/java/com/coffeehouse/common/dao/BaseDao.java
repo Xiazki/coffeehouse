@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -21,8 +22,8 @@ public class BaseDao<T> implements IBaseDao<T> {
         return this.getCurrentSesson().get(var1, id);
     }
 
-    public void save(T entity) throws Exception {
-        this.getCurrentSesson().save(entity);
+    public Serializable save(T entity) throws Exception {
+        return this.getCurrentSesson().save(entity);
     }
 
     public void update(T entity) throws Exception {
@@ -45,9 +46,9 @@ public class BaseDao<T> implements IBaseDao<T> {
 
     }
 
-    public T getSingleQueryData(Class<T> var1,String hqlwhere,Object... pars) throws Exception{
+    public T getSingleQueryData(Class<T> var1, String hqlwhere, Object... pars) throws Exception {
         String hql = "select o from " + getClassName(var1) + " o " + (hqlwhere == null ? "" : "where " + hqlwhere);
-        return (T) this.createQuery(hql,false,pars).uniqueResult();
+        return (T) this.createQuery(hql, false, pars).uniqueResult();
     }
 
     public List<T> getQueryData(Class<T> var1) throws Exception {
@@ -55,30 +56,35 @@ public class BaseDao<T> implements IBaseDao<T> {
     }
 
     public List<T> getQueryData(Class<T> var1, String hqlWhere, Object... pars) throws Exception {
-        return this.getQueryData(var1,null,hqlWhere,pars);
+        return this.getQueryData(var1, null, hqlWhere, pars);
     }
 
     public List<T> getQueryData(Class<T> var1, LinkedHashMap<String, String> orderBy) throws Exception {
-        return this.getQueryData(var1, orderBy, null,null);
+        return this.getQueryData(var1, orderBy, null, null);
     }
 
 
     public List<T> getQueryData(Class<T> var1, LinkedHashMap<String, String> orderBy, String hqlWhere, Object... pars) {
         String hql = "select o from " + getClassName(var1) + " o " + (hqlWhere == null ? "" : "where " + hqlWhere) + getOrderBy(orderBy);
-        Query query = this.createQuery(hql,false,pars);
+        Query query = this.createQuery(hql, false, pars);
         return query.list();
     }
 
     public List<T> getScrollData(Class<T> var1) throws Exception {
-        return null;
+        return getScrollData(var1, 0, 10);
     }
 
-    public List<T> getScrollData(Class<T> var1, int firstPage, int maxResult) {
-        return null;
+    public List<T> getScrollData(Class<T> var1, int firstPage, int maxResult) throws Exception {
+        return getScrollData(var1, firstPage, maxResult, null, null);
     }
 
-    public List<T> getScrollData(Class<T> var1, int firstPage, int maxResult, String sqlWhere, Object... pars) throws Exception {
-        return null;
+    public List<T> getScrollData(Class<T> var1, int firstPage, int maxResult, String hqlWhere, Object... pars) throws Exception {
+        String hql = "select o from " + getClassName(var1) + " o " + (hqlWhere == null ? "" : " where " + hqlWhere);
+        Query query = this.createQuery(hql,false,pars);
+        query.setFirstResult(firstPage)
+                .setMaxResults(maxResult);
+
+        return query.list();
     }
 
     public List<Object[]> excuteQuery(String sql) {
@@ -128,17 +134,17 @@ public class BaseDao<T> implements IBaseDao<T> {
         return strBuilder.toString();
     }
 
-    //(+1s)
-    public Query createQuery(String ql,Boolean isNaive,Object... pars) {
+
+    public Query createQuery(String ql, Boolean isNaive, Object... pars) {
         Query query = null;
-        if(isNaive){
+        if (isNaive) {
             query = this.getCurrentSesson().createSQLQuery(ql);
-        }else{
+        } else {
             query = this.getCurrentSesson().createQuery(ql);
         }
-        if(pars!=null&& pars.length>0){
-            for(int i= 0;i<pars.length;i++){
-                query.setParameter(i,pars[i]);
+        if (pars != null && pars.length > 0) {
+            for (int i = 0; i < pars.length; i++) {
+                query.setParameter(i, pars[i]);
             }
         }
         return query;
@@ -147,9 +153,9 @@ public class BaseDao<T> implements IBaseDao<T> {
     @Deprecated
     public SQLQuery createSQLQuery(String sql, Object... pars) {
         SQLQuery sqlQuery = this.getCurrentSesson().createSQLQuery(sql);
-        if(pars!=null&& pars.length>0){
-            for(int i= 0;i<pars.length;i++){
-                sqlQuery.setParameter(i,pars[i]);
+        if (pars != null && pars.length > 0) {
+            for (int i = 0; i < pars.length; i++) {
+                sqlQuery.setParameter(i, pars[i]);
             }
         }
         return sqlQuery;

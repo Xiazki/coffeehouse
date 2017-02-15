@@ -47,4 +47,13 @@
         <property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml" />
     </bean>
 
+    <!--配置SpringMVC 拦截器-->
+    <mvc:interceptors>
+        <bean class="com.coffeehouse.login.interceptor.CoffeerTakenInterceptor"/>
+        <mvc:interceptor>
+            <mvc:mapping path="/coffeer/*"/>
+            <bean class="com.coffeehouse.login.interceptor.CoffeerRequiredInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>

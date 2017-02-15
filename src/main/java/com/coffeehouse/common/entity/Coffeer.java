@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="coffer")
+@Table(name="coffeer")
 public class Coffeer extends BaseEntity<Long>{
 
     @Column(name = "name")
@@ -19,6 +19,17 @@ public class Coffeer extends BaseEntity<Long>{
 
     @Column(name = "head_url")
     private String headUrl;
+
+    @Column(name = "nickname")
+    private String nickName;
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
     public String getName() {
         return name;

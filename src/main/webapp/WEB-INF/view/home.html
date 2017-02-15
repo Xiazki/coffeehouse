@@ -1,11 +1,11 @@
 <!doctype html>
 <html>
     <head>
-        #include("./common/header.html")
+        #parse("./common/header.html")
     </head>
     <body>
         <!-- start nav -->
-        #include("./common/nav.html")
+        #parse("./common/nav.html")
         <!-- end nav -->
 
         <!-- Start of Page Container -->
@@ -18,20 +18,21 @@
                     <div class="span8 main-listing">
 
 
-                        <!-- Basic Home Page Template -->
-
+                        <!-- Basic Home Page Template
+                         -->
+                        #foreach($question in $questions)
                         <article class="format-standard type-post hentry clearfix">
 
                             <header class="clearfix">
 
                                 <h3 class="post-title">
-                                    <a href="single.html">如何入门大数据？</a>
+                                    <a href="single.html">$!{question.title}</a>
                                 </h3>
 
                                 <div class="post-meta clearfix">
-                                    <span class="date">25 Feb, 2013</span>
+                                    <span class="date">$!{question.createDate}</span>
                                     <span class="category"><a href="#" title="View all posts in Server &amp; Database">java &amp; 大数据</a></span>
-                                    <span class="comments"><a href="#" title="Comment on Integrating WordPress with Your Website">3 回答</a></span>
+                                    <span class="comments"><a href="#" title="Comment on Integrating WordPress with Your Website">$!{question.commentCount} 回答</a></span>
 
                                 </div><!-- end of post meta -->
 
@@ -49,7 +50,7 @@
 
                                             <h5 class="author">
                                                 <cite class="fn">
-                                                    <a href="#" rel="external nofollow" class="url">John Doe</a>
+                                                    <a href="#" rel="external nofollow" class="url">$!question.coffeer.name}</a>
                                                 </cite>
                                                 - <a class="comment-reply-link" href="#">Reply</a>
                                             </h5>
@@ -67,8 +68,7 @@
                                         </div><!-- end .comment-meta -->
 
                                         <div class="comment-body">
-                                            <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
-                                            <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.
+                                                <p>$!{question.description}</p>
                                                 <a class="readmore-link" href="http://knowledgebase.inspirythemes.com/integrating-wordpress-with-your-website/">查看全文</a></p>
                                         </div><!-- end of comment-body -->
 
@@ -76,7 +76,7 @@
                                 </li>
                             </ol>
                         </article>
-
+                        #end
 
 
 

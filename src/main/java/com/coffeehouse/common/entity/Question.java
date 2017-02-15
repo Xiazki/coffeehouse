@@ -1,13 +1,13 @@
 package com.coffeehouse.common.entity;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * 问题实体
  */
+@Entity
+@Table(name="question")
 public class Question extends BaseEntity<Long> {
 
     @Column(name = "title")

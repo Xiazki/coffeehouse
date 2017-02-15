@@ -1,5 +1,8 @@
 package com.coffeehouse.common.dao.idao;
 
+import org.hibernate.Query;
+
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -9,7 +12,7 @@ public interface IBaseDao<T> extends ISQLBaseDao{
     //强制checkedExpection
     public T get(Class<T> var1,Long id)throws Exception;
 
-    public void save(T entity) throws Exception;
+    public Serializable save(T entity) throws Exception;
 
     public void update(T entity) throws Exception;
 
@@ -36,8 +39,9 @@ public interface IBaseDao<T> extends ISQLBaseDao{
 
     public List<T> getScrollData(Class<T> var1) throws Exception;
 
-    public List<T> getScrollData(Class<T> var1,int firstPage,int maxResult);
+    public List<T> getScrollData(Class<T> var1,int firstPage,int maxResult) throws Exception;
 
     public List<T> getScrollData(Class<T> var1,int firstPage,int maxResult,String sqlWhere,final Object... pars) throws Exception;
 
+    public Query createQuery(String ql, Boolean isNaive, Object... pars);
 }

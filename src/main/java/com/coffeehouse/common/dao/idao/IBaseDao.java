@@ -31,7 +31,7 @@ public interface IBaseDao<T> extends ISQLBaseDao{
 
     public List<T> getQueryData(Class<T> var1) throws Exception;
 
-    public List<T> getQueryData(Class<T> var1,String hqlWhere,final Object... pars) throws Exception;
+    public List<T> getQueryData(Class<T> var1, String hqlWhere, Object... pars) throws Exception;
 
     public List<T> getQueryData(Class<T> var1,LinkedHashMap<String,String> orderBy) throws Exception;
 

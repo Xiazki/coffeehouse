@@ -69,6 +69,14 @@ public class CoffeerService {
         return ret;
     }
 
+    /**
+     * 获得匿名用户
+     * @return
+     * @throws Exception
+     */
+    public Coffeer getAnonymousUser() throws Exception {
+        return coffeerDao.get(Coffeer.class,13L);
+    }
     public void logout(Coffeer coffeer){
         coffeerTakenService.updateStatus(coffeer.getId());
     }
@@ -86,7 +94,7 @@ public class CoffeerService {
         CoffeerTaken ct = new CoffeerTaken();
         ct.setStatus(1);
         Date exproationDate = new Date();
-        exproationDate.setTime(exproationDate.getTime()+3600*24*10);
+        exproationDate.setTime(exproationDate.getTime()+3600*24*10*1000);
         ct.setExpriationDate(exproationDate);
         ct.setCreateDate(new Date());
         String taken  = UUID.randomUUID().toString().replace("-","");

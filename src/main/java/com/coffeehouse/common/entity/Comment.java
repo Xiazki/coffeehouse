@@ -20,8 +20,19 @@ public class Comment extends BaseEntity<Long>{
     @Column(name = "create_date")
     private Date createDate;
 
-    @Column(name = "type")
+    @Column(name = "entity_type")
     private String type;
+
+    @Column(name = "entity_id")
+    private Long entityId;
+
+    public Long getEntityId() {
+        return entityId;
+    }
+
+    public void setEntityId(Long entityId) {
+        this.entityId = entityId;
+    }
 
     public String getContent() {
         return content;

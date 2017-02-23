@@ -16,7 +16,6 @@ public class HomeController extends BaseController {
     @RequestMapping(path = {"/","/index"},method = {RequestMethod.GET,RequestMethod.POST})
     public String home(Model model) throws Exception {
         model.addAttribute("questions",questionService.getLastQuestion(0,3));
-
         return "home";
     }
 

@@ -35,6 +35,10 @@ public class CommentService {
     @Autowired
     private CoffeeHouseHolder coffeeHouseHolder;
 
+    public Comment getCommentById(Long id) throws Exception {
+        return commentDao.get(Comment.class,id);
+    }
+
     public List<Comment> getCommentList(String commentType,Long id) throws Exception {
         String hqlwhere = " o.type= ? and o.entityId = ? ";
         return commentDao.getQueryData(Comment.class,hqlwhere,commentType,id);

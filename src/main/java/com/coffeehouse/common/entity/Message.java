@@ -21,10 +21,40 @@ public class Message extends BaseEntity<Long> {
     private Coffeer toCoffeer;
 
     @Column(name = "content")
-    private String context;
+    private String content;
 
     @Column(name = "create_date")
     private Date createDate;
+
+    @Column(name = "status")
+    private boolean status;
+
+    @Column(name = "type")
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
     public Coffeer getFromCoffeer() {
         return fromCoffeer;
@@ -40,14 +70,6 @@ public class Message extends BaseEntity<Long> {
 
     public void setToCoffeer(Coffeer toCoffeer) {
         this.toCoffeer = toCoffeer;
-    }
-
-    public String getContext() {
-        return context;
-    }
-
-    public void setContext(String context) {
-        this.context = context;
     }
 
     public Date getCreateDate() {

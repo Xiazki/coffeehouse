@@ -16,26 +16,30 @@
             <nav class="main-nav">
                 <div class="menu-top-menu-container">
                     <ul id="menu-top-menu" class="clearfix">
-                        <li class="current-menu-item"><a href="index-2.html">问题广场</a></li>
-                        <li><a href="home-categories-description.html">现场提问&解答</a></li>
-                        <li><a href="contact.html">专栏&技术分享</a></li>
-                        <li><a href="home-categories-articles.html">资源&下载</a></li>
+                        <li class="current-menu-item"><a href="/">问题广场</a></li>
+                        <li><a href="/">现场提问&解答</a></li>
+                        <li><a href="/">专栏&技术分享</a></li>
+                        <li><a href="/">资源&下载</a></li>
                         #if(!$coffeer)
                         <li><a href="#login_id" data-uk-modal="{center:true}">登陆</a></li>
 
                         <li><a href="#register_id" data-uk-modal>注册</a></li>
                         #else
-                        <li data-uk-dropdown="{mode:'click'}" aria-haspopup="true" aria-expanded="false" class="">
+                        <li data-uk-dropdown="{mode:'click'}" aria-haspopup="true" aria-expanded="false" class="uk-panel">
                             <a href="#">$!{coffeer.name}<i class="uk-icon-caret-down"></i></a>
                             <div class="uk-dropdown uk-dropdown-small uk-dropdown-bottom" style="top: 26px; left: 0px;">
                                 <ul class="uk-nav uk-nav-dropdown">
-                                    <li><a href="blue-skin.html">我的主页</a></li>
+                                    <li><a href="/coffeer/profile">我的主页</a></li>
                                     <li><a href="green-skin.html">我的提问</a></li>
                                     <li><a href="red-skin.html">我的回答</a></li>
-                                    <li><a href="index-2.html">私信</a></li>
+                                    <li class="uk-panel">
+                                        <a href="/coffeer/inbox">私信</a>
+                                        <span class="uk-panel-badge uk-badge  uk-badge-notification">999+</span>
+                                    </li>
                                     <li><a href="/logout">退出</a></li>
                                 </ul>
                             </div>
+                            <span class="uk-panel-badge uk-badge  uk-badge-notification">999+</span>
                         </li>
                         #end
                         <li><a href="#ask_id" data-uk-modal="{center:true}">提问</a>
@@ -51,26 +55,13 @@
 
 
 <!-- Start of Search Wrapper -->
-<div class="search-area-wrapper">
-    <div class="search-area container">
-        <h3 class="search-header">有不明白的问题?</h3>
-        <p class="search-tag-line">现在来搜索你感到疑惑的问题的答案吧!</p>
-
-        <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
-            <input class="search-term required" type="text" id="s" name="s" placeholder="问题描述"
-                   title="* Please enter a search term!"/>
-            <input class="search-btn" type="submit" value="搜索"/>
-            <div id="search-error-container"></div>
-        </form>
-    </div>
-</div>
 
 <div id="login_id" class="uk-modal">
-    <div class="uk-modal-dialog ">
+    <div class="uk-modal-dialog">
         <a class="uk-modal-close uk-close"></a>
         <div class="uk-vertical-align uk-text-center uk-height-1-1">
             <div class="uk-vertical-align-middle" style="width: 250px;">
-                <form class="uk-panel uk-panel-box uk-form" id="login_form" action="" method="post">
+                <form class="uk-panel uk-form" id="login_form" action="" method="post">
                     <div class="uk-form-row">
                         <input name="name" class="uk-width-1-1 uk-form-large" type="text" placeholder="用户名"
                                data-rule="required"

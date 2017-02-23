@@ -6,12 +6,15 @@ import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.List;
+
 @Component
 public class RedisAdapter {
 
     private static final String SPIT = ":";
     private static final String LIKE = "like";
     private static final String DISLIKE = "dislike";
+    private static final String EVENT = "event";
 
     @Autowired
     private JedisPool jedisPool;
@@ -21,6 +24,10 @@ public class RedisAdapter {
      */
     public static String getLikeOrDisLikeKey(Long entityId,String type,boolean isLike){
         return (isLike?LIKE:DISLIKE)+SPIT+entityId+SPIT+type;
+    }
+
+    public static String getEventKey(){
+        return EVENT;
     }
 
     /**
@@ -109,4 +116,31 @@ public class RedisAdapter {
         }
     }
 
+    public long lpush(String key,String value) throws Exception {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            return jedis.lpush(key,value);
+        }catch (Exception e){
+            throw e;
+        }finally {
+            if(jedis != null){
+                jedis.close();
+            }
+        }
+    }
+
+    public List<String> lpop(String key) throws Exception {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            return jedis.brpop(0,key);
+        }catch (Exception e){
+            throw e;
+        }finally {
+            if(jedis != null){
+                jedis.close();
+            }
+        }
+    }
 }

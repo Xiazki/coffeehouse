@@ -129,7 +129,7 @@ public class BaseDao<T> implements IBaseDao<T> {
             }
             strBuilder.deleteCharAt(strBuilder.length() - 1);
         } else {
-            strBuilder.append(" order by o.createDate ");
+            strBuilder.append(" order by o.createDate desc");
         }
         return strBuilder.toString();
     }

@@ -52,6 +52,7 @@
         <bean class="com.coffeehouse.login.interceptor.CoffeerTakenInterceptor"/>
         <mvc:interceptor>
             <mvc:mapping path="/coffeer/*"/>
+            <mvc:mapping path="/mess/*"/>
             <bean class="com.coffeehouse.login.interceptor.CoffeerRequiredInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

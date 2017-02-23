@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+    #parse("./common/header.html")
+</head>
+
+<body>
+
+<!-- start nav -->
+#parse("./common/nav.html")
+<!-- end nav -->
+
+<div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+    <div class="uk-grid" data-uk-grid-margin>
+        <!--左半部分-->
+        <div class="uk-width-medium-3-4 uk-row-first">
+            <!--通知选项卡-->
+            <ul class="uk-tab" data-uk-tab>
+                <li class="uk-active uk-panel">
+                    <a href="javascript:void(0);" onclick="onTabClick('system',this)" flag="true"><i
+                            class="uk-icon-medium uk-icon-desktop"></i>系统通知
+                        <span class="uk-panel-badge uk-badge uk-badge-danger">12</span>
+                    </a>
+                </li>
+                <li class="uk-panel">
+                    <a href="javascript:void(0);" onclick="onTabClick('comment',this)" flag="true"><i
+                            class="uk-icon-medium uk-icon-comments"></i>评论通知
+                        <span class="uk-panel-badge uk-badge  uk-badge-notification uk-badge-success">1</span>
+                    </a>
+                </li>
+                <li class="uk-panel">
+                    <a href="javascript:void(0);" onclick="onTabClick('like',this)" flag="true"><i
+                            class="uk-icon-medium uk-icon-thumbs-up"></i>点赞通知
+                        <span class="uk-panel-badge uk-badge uk-badge-notification uk-badge-warning">999+</span>
+                    </a>
+                </li>
+                <li class="uk-panel">
+                    <a href="javascript:void(0);" onclick="onTabClick('message',this)" flag="true">
+                        <i class="uk-icon-medium uk-icon-envelope"></i>私信通知
+                        <div>
+                            <span class="uk-panel-badge uk-badge uk-badge-notification uk-badge-danger">999+</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+            <div id="tab_content" class="uk-panel  uk-panel-space">
+
+            </div>
+        </div>
+
+        <div class="uk-width-medium-1-4">
+            <div class="uk-grid" data-uk-grid-margin>
+                <button class="uk-button uk-width-1-1 uk-button-primary"
+                        data-uk-modal="{target:'#send_mess_id',center:true}">发送私信
+                </button>
+            </div>
+            <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-panel uk-panel-box uk-width-1-1">
+                    <table class="uk-table uk-table-hover">
+                        <th>我的关注</th>
+                        <tr>
+                            <td>123</td>
+                        </tr>
+                        <tr>
+                            <td>123</td>
+                        </tr>
+                        <tr>
+                            <td>123</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-panel uk-panel-box uk-width-1-1">
+                    <table class="uk-table uk-table-hover">
+                        <th>关注我的</th>
+                        <tr>
+                            <td>123</td>
+                        </tr>
+                        <tr>
+                            <td>123</td>
+                        </tr>
+                        <tr>
+                            <td>123</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="send_mess_id" class="uk-modal">
+        <div class="uk-modal-dialog">
+            <a class="uk-modal-close uk-close"></a>
+            <form id="message_form" class="uk-form  uk-form-stacked">
+                <div class="uk-form-row">
+                    <label class="uk-form-label">用户名</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-form-icon">
+                            <i class="uk-icon-user"></i>
+                            <input name="coffeerName" type="text" class="uk-form-large uk-form-width-large"
+                                   ata-rule="required"
+                                   data-msg-required="用户不能为空！">
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">内容</label>
+                    <div class="uk-form-controls">
+                        <textarea name="content" class="uk-width-1-1" rows="10px"></textarea>
+                    </div>
+                </div>
+
+                <div class="uk-form-row">
+                    <button class="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="submit">发送
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src='${link.contextPath}/static/js/common/inbox.js'></script>
+</body>
+</html>

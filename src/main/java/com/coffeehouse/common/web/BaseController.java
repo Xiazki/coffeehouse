@@ -8,6 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 /**
  * Created by xiang on 2017/2/13.
  */
@@ -47,9 +50,10 @@ public class BaseController {
      */
 
     @ExceptionHandler(Exception.class)
-    protected void expection(Exception e){
+    protected void expection(Exception e, HttpServletResponse response) throws IOException {
         e.printStackTrace();
         logger.error(e.getMessage());
+        response.sendError(500);
 
     }
 

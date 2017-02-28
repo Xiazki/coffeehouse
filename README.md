@@ -11,3 +11,4 @@ coffeerhouse 专注于java的社交问答社区，开发中。。。
 * 基于websocket实现消息实时通知，在线话题讨论功能  开发中
 * 基于solr实现了站内搜索；
 * 使用python实现了站外搜索，和初始数据爬虫；开发中
+* 探索在线话题讨论的实现方式netty websocket。开发中

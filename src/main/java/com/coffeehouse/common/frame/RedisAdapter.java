@@ -42,7 +42,7 @@ public class RedisAdapter {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
-            //
+            //test
             return jedis.sadd(key,value);
         }catch (Exception e){
             throw e;

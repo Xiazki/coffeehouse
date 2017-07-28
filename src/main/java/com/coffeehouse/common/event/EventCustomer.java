@@ -44,7 +44,7 @@ public class EventCustomer implements InitializingBean,ApplicationContextAware{
                 }
             }
         }
-        //test
+
         new Thread(new Runnable() {
             public void run() {
                 while(true){
